@@ -19,6 +19,7 @@ class User extends Admin_Controller {
 		$this->unset_crud_fields('ip_address', 'last_login');
 
 		// only webmaster and admin can change member groups
+		
 		if ($crud->getState()=='list' || $this->ion_auth->in_group(array('webmaster', 'admin')))
 		{
 			$crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
@@ -26,6 +27,10 @@ class User extends Admin_Controller {
 			//Relation with Entity
 			//$crud->set_relation('entity_code','cdac_entities','{entity_code}-{entity_name}',array('entity_type' => 'ATC', 'entity_status' => 'A',), 'entity_code, entity_name ASC');
 					
+		}
+		if ($crud->getState()=='edit')
+		{
+			$crud->set_relation('entity_code','ems_departments','{department_code}',array('1' => '1'), ' department_code ASC');
 		}
 
 		// only webmaster and admin can reset user password
