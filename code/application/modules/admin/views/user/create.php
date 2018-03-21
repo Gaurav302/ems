@@ -37,8 +37,9 @@
 						<div>
 						<select class="form-control" name="entity_code">
 							<option value="">-Select One-</option>  
-						<?php foreach ($entities as $entity): ?>
-								<option value="<?php echo $entity->entity_type; ?>#<?php echo $entity->entity_code; ?>"> <?php echo $entity->entity_code; ?>  (<?php echo $entity->entity_name; ?>)</option>
+						<?php $entity = $this->db->query("SELECT * FROM ems_departments WHERE status='A'")->result(); foreach ($entity as $entity): ?>
+								<!-- <option value="<?php echo $entity->entity_type; ?>#<?php echo $entity->entity_code; ?>"> <?php echo $entity->entity_code; ?>  (<?php echo $entity->entity_name; ?>)</option> -->
+								<option value="<?php echo $entity->department_code; ?> ?>"> <?php echo $entity->department_title; ?> </option>
 						<?php endforeach; ?>
 						</select>
 						</div>
